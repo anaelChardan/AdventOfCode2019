@@ -2,31 +2,37 @@ import kotlin.math.absoluteValue
 import kotlin.math.max
 import kotlin.math.min
 
+data class Position(val x: Int, val y: Int, val stepsTo: Int = 0)
+data class Vector (val direction: Direction, val length: Int)
+
+enum class Direction { L, D, R, U }
+
+fun fromString(char : Char): Direction =
+    when (char) {
+        'D' -> Direction.D
+        'L' -> Direction.L
+        'R' -> Direction.R
+        'U' -> Direction.U
+        else -> error("UnknownDirection")
+    }
+
+
 class Day3(val lines: List<String>): Day<Int, Int> {
+    val firstWireDirections = lines[0].split(",").map { Vector(fromString(it[0]), it.drop(1).toInt()) }
+    val secondWireDirections = lines[1].split(",").map { Vector(fromString(it[0]), it.drop(1).toInt()) }
+
+    val startingPosition = Position(1, 1)
+
+    val firstWire = getWire(firstWireDirections, startingPosition)
+    val secondWire = getWire(secondWireDirections, startingPosition)
 
     override fun part1(): Int {
-        val firstWireDirections = lines[0].split(",").map { Vector(fromString(it[0]), it.drop(1).toInt()) }
-        val secondWireDirections = lines[1].split(",").map { Vector(fromString(it[0]), it.drop(1).toInt()) }
-
-        val startingPosition = Position(1, 1)
-
-        val firstWire = getWire(firstWireDirections, startingPosition)
-        val secondWire = getWire(secondWireDirections, startingPosition)
-
-        val closest = firstWire.intersect(secondWire).map { manhattanDistance(it, startingPosition) }.min()
+        val closest = firstWire.map { Position(it.x, it.y) }.intersect(secondWire.map { Position(it.x, it.y) }).map { manhattanDistance(it, startingPosition) }.min()
 
         return closest!!
     }
 
     override fun part2(): Int {
-        val firstWireDirections = lines[0].split(",").map { Vector(fromString(it[0]), it.drop(1).toInt()) }
-        val secondWireDirections = lines[1].split(",").map { Vector(fromString(it[0]), it.drop(1).toInt()) }
-
-        val startingPosition = Position(1, 1)
-
-        val firstWire = getWire(firstWireDirections, startingPosition)
-        val secondWire = getWire(secondWireDirections, startingPosition)
-
         val intersections = firstWire.map { Position(it.x, it.y) }.intersect(secondWire.map { Position(it.x, it.y) })
 
         val closestInStep = intersections.map { i -> firstWire.find { it.x == i.x && it.y == i.y }!!.stepsTo + secondWire.find { it.x == i.x && it.y == i.y }!!.stepsTo }.min()
@@ -72,17 +78,3 @@ class Day3(val lines: List<String>): Day<Int, Int> {
             )
         }
 }
-
-data class Position(val x: Int, val y: Int, val stepsTo: Int = 0)
-data class Vector (val direction: Direction, val length: Int)
-
-enum class Direction { L, D, R, U }
-
-fun fromString(char : Char): Direction =
-    when (char) {
-        'D' -> Direction.D
-        'L' -> Direction.L
-        'R' -> Direction.R
-        'U' -> Direction.U
-        else -> error("UnknownDirection")
-    }

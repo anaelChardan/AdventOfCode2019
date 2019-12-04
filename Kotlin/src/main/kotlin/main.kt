@@ -1,16 +1,21 @@
 import java.io.File
+import kotlin.system.measureTimeMillis
 
 fun main() {
     val linesLoader = LinesLoader()
-//    val day1 = Day1(linesLoader.getLines(1))
-//    println("Day 1, part 1 ${day1.part1()}")
-//    println("Day 1, part 2 ${day1.part2()}")
-//    val day2 = Day2(linesLoader.getLines(2))
-//    println("Day 2, part 1 ${day2.part1()}")
-//    println("Day 2, part 2 ${day2.part2()}")
-    val day3 = Day3(linesLoader.getLines(3))
-//    println("Day 3, part 1 ${day3.part1()}")
-    println("Day 3, part 2 ${day3.part2()}")
+    listOf(
+        Day1(linesLoader.getLines(1)),
+        Day2(linesLoader.getLines(2)),
+        Day3(linesLoader.getLines(3)),
+        Day4()
+    ).forEachIndexed { index: Int, elem: Day<Int, Int> -> day(elem, index+1) }
+}
+
+fun day(day: Day<Int, Int>, dayNb: Int) {
+    val part1Duration = measureTimeMillis { day.part1() }
+    val part2Duration = measureTimeMillis { day.part2() }
+    println("Day $dayNb part 1 : ${day.part1()}, duration $part1Duration ms")
+    println("Day $dayNb part 2 : ${day.part2()}, duration $part2Duration ms")
 }
 
 
