@@ -36,6 +36,7 @@ tests:
   adventofcode-test:
     main:                Spec.hs
     other-modules:       AdventOfCode1Spec
+                         AdventOfCode2Spec
     source-dirs:         test
     ghc-options:
     - -threaded
@@ -43,5 +44,6 @@ tests:
     - -with-rtsopts=-N
     dependencies:
     - adventofcode
+    - split
     - hspec
     - hspec-discover
