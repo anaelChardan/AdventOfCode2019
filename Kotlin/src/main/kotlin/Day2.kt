@@ -27,22 +27,8 @@ class Day2(val lines: List<String>): Day<Int, Int> {
         tmp[1] = noun;
         tmp[2] = verb;
 
-        return run(tmp, 0);
-    }
-
-    private fun run(computer: MutableList<Int>, position: Int): List<Int> {
-        val opcode = computer[position]
-        return when (opcode) {
-            1 -> {
-                computer[computer[position + 3]] = computer[computer[position + 1]] + computer[computer[position + 2]]
-                run(computer, position + 4)
-            }
-            2 -> {
-                computer[computer[position + 3]] = computer[computer[position + 1]] * computer[computer[position + 2]]
-                run(computer, position + 4)
-            }
-            99 -> computer
-            else -> error("Cant work")
-        }
+        return IntCodeComputer(tmp).run(emptyList()).values
     }
 }
+
+

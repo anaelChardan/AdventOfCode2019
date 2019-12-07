@@ -7,7 +7,8 @@ fun main() {
         Day1(linesLoader.getLines(1)),
         Day2(linesLoader.getLines(2)),
         Day3(linesLoader.getLines(3)),
-        Day4()
+        Day4(),
+        Day5(linesLoader.getLines(5))
     ).forEachIndexed { index: Int, elem: Day<Int, Int> -> day(elem, index+1) }
 }
 

@@ -42,7 +42,7 @@ class Day3(val lines: List<String>): Day<Int, Int> {
 
     private fun manhattanDistance(position1: Position, position2: Position): Int = position1.x.absoluteDifference(position2.x) + position1.y.absoluteDifference(position2.y)
 
-    private fun Int.absoluteDifference(other: Int) : Int = max(this.absoluteValue, other.absoluteValue).minus(min(this.absoluteValue, other.absoluteValue))
+    private fun Int.absoluteDifference(other: Int) : Int = max(this, other).minus(min(this, other))
 
     private fun getWire(vectors: List<Vector>, startingPosition: Position): List<Position> = vectors.fold(
         Pair(startingPosition, emptyList()), { acc: Pair<Position, List<Position>>, current: Vector ->

@@ -35,8 +35,7 @@ library:
 tests:
   adventofcode-test:
     main:                Spec.hs
-    other-modules:       AdventOfCode1Spec
-                         AdventOfCode2Spec
+    other-modules:       AdventOfCode3Spec
     source-dirs:         test
     ghc-options:
     - -threaded

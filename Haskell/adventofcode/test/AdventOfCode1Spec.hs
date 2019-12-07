@@ -52,6 +52,6 @@ module AdventOfCode1Spec where
         it "is able to get the sum" $ do
             fmap totalFuelRequierement (parseDay1Input "day1-input.txt") `shouldReturn` 3393938 
     
-        it "is able to get the sum of the total fuel" $ do 
-            fmap recursiveTotalFuelRequirement (parseDay1Input "day1-input.txt") `shouldReturn` 5088037 
+        -- it "is able to get the sum of the total fuel" $ do 
+        --     fmap recursiveTotalFuelRequirement (parseDay1Input "day1-input.txt") `shouldReturn` 5088037 
             
